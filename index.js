@@ -1,16 +1,19 @@
-const inquirer = require("inquirer"); //allows for prompting user
-const axios = require("axios"); //Promise based HTTP client for the browser and node.js
-const fs = require("fs"); //Allows me to access local file system
-const util = require("util"); //provides some utility functions
-const pdf = require("html-pdf"); //HTML to PDF converter that uses phantomjs
-const open = require("open"); //package to open pdf documents
-const generateHTML = require("./generateHTML.js"); // imported js file that stores code for html generation
+// week 09
+// github pdf generator
+
+// variables for pkg requirements 
+const inquirer = require("inquirer"); // //prompt
+const axios = require("axios"); // get
+const fs = require("fs"); // file sync to access local
+const util = require("util"); // extra utility 
+const pdf = require("html-pdf"); // html to pdf converter 
+const open = require("open"); // opens pdfs
+const generateHTML = require("./generateHTML.js"); // imports js file w/ code for html generation
 
 
 const writeFileAsync = util.promisify(fs.writeFile);
 
-
-// prompts the user for github username and favorite color. User is restricted to 4 colors
+// intial prompt for user, takes username/color preference
 function promptUser() {
     return inquirer.prompt([
         {
@@ -26,7 +29,7 @@ function promptUser() {
     ]);
 }
 
-//calls promptUser function and chains promises to perform specific tasks ending with a catch() which will throw an error if one exists
+// calls promopt user and utilizes the data to create a pdf
 promptUser()
     .then(function (userAns) {
         data = userAns;
